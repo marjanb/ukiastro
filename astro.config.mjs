@@ -11,5 +11,6 @@ export default defineConfig({
   integrations: [vue()],
   build: {
     inlineStylesheets: 'never'
-  }
+  },
+  trailingSlash: 'never',
 });

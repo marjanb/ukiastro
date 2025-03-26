@@ -1,63 +1,42 @@
----
-const pathname = Astro.url.pathname;
-const navLinks = [
-  { path: "/video", label: "Video" },
-  { path: "/photo", label: "Photo" },
-  { path: "/illustration-and-design", label: "Illustration & Design" },
-  { path: "/makeup", label: "Makeup" },
-  { path: "/contact", label: "Contact" }
-];
----
-
 <ul class="flex uppercase font-light text-3xl justify-between py-8 nav flex-col md:flex-row">
-  {navLinks.map((link) => (
-    <li>
-      <a href={link.path} class={pathname === link.path ? "active" : ""}>
-        {link.label}
-      </a>
-    </li>
-  ))}
+  <li><a href="/video">Video</a></li>
+  <li><a href="/photo">Photo</a></li>
+  <li><a href="/illustration-and-design">Illustration & Design</a></li>
+  <li><a href="/makeup">Makeup</a></li>
+  <li><a href="/contact">Contact</a></li>
 </ul>
 
-<!--<ul class="flex uppercase font-light text-3xl justify-between py-8 nav flex-col md:flex-row">-->
-<!--  <li><a href="/video">Video</a></li>-->
-<!--  <li><a href="/photo">Photo</a></li>-->
-<!--  <li><a href="/illustration-and-design">Illustration & Design</a></li>-->
-<!--  <li><a href="/makeup">Makeup</a></li>-->
-<!--  <li><a href="/contact">Contact</a></li>-->
-<!--</ul>-->
+<script>
+  // Get the current path from the window location
+  const pathname = window.location.pathname;
+  const currentPath = pathname.slice(1);
 
-<!--<script>-->
-<!--  // Get the current path from the window location-->
-<!--  const pathname = window.location.pathname;-->
-<!--  const currentPath = pathname.slice(1);-->
+  // Highlight the current page in the navigation
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('.nav a');
 
-<!--  // Highlight the current page in the navigation-->
-<!--  document.addEventListener('DOMContentLoaded', () => {-->
-<!--    const links = document.querySelectorAll('.nav a');-->
+    links.forEach(link => {
+      const href = link.getAttribute('href');
 
-<!--    links.forEach(link => {-->
-<!--      const href = link.getAttribute('href');-->
+      // Extract just the base part of the path (without leading slash or file extension)
+      let hrefBase = href?.replace(/^\//, ''); // Remove leading slash
+      hrefBase = hrefBase?.replace(/\.[^/.]+$/, ''); // Remove file extension if present
 
-<!--      // Extract just the base part of the path (without leading slash or file extension)-->
-<!--      let hrefBase = href?.replace(/^\//, ''); // Remove leading slash-->
-<!--      hrefBase = hrefBase?.replace(/\.[^/.]+$/, ''); // Remove file extension if present-->
+      // Get the base of the current path
+      let currentPathBase = currentPath.replace(/\.[^/.]+$/, ''); // Remove file extension if present
 
-<!--      // Get the base of the current path-->
-<!--      let currentPathBase = currentPath.replace(/\.[^/.]+$/, ''); // Remove file extension if present-->
+      // Special case for home/index
+      if (currentPathBase === '' || currentPathBase === 'index') {
+        currentPathBase = 'index';
+      }
 
-<!--      // Special case for home/index-->
-<!--      if (currentPathBase === '' || currentPathBase === 'index') {-->
-<!--        currentPathBase = 'index';-->
-<!--      }-->
+      // Compare the base paths
+      const isCurrentPage = currentPathBase === hrefBase ||
+        pathname === href;
 
-<!--      // Compare the base paths-->
-<!--      const isCurrentPage = currentPathBase === hrefBase ||-->
-<!--        pathname === href;-->
-<!--      -->
-<!--      if (isCurrentPage) {-->
-<!--        link?.classList.add('active');-->
-<!--      }-->
-<!--    });-->
-<!--  });-->
-<!--</script>-->
+      if (isCurrentPage) {
+        link?.classList.add('active');
+      }
+    });
+  });
+</script>

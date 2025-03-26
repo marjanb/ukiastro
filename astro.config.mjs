@@ -10,7 +10,8 @@ export default defineConfig({
   },
   integrations: [vue()],
   build: {
-    inlineStylesheets: 'never'
+    inlineStylesheets: 'never',
+    format: 'file',
   },
   trailingSlash: 'never',
 });

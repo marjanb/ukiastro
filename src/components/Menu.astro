@@ -1,0 +1,20 @@
+---
+const pathname = Astro.url.pathname;
+const navLinks = [
+  { path: "/video", label: "Video" },
+  { path: "/photo", label: "Photo" },
+  { path: "/illustration-and-design", label: "Illustration & Design" },
+  { path: "/makeup", label: "Makeup" },
+  { path: "/contact", label: "Contact" }
+];
+---
+
+<ul class="flex uppercase font-light text-3xl justify-between py-8 nav flex-col md:flex-row">
+  {navLinks.map((link) => (
+    <li>
+      <a href={link.path} class={pathname === link.path ? "active" : ""}>
+        {link.label}
+      </a>
+    </li>
+  ))}
+</ul>

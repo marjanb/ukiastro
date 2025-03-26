@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "tailwindcss/preflight.css" layer(base);
+
+@theme {
+  --font-sans: 'Inter Tight', 'sans-serif';
+}

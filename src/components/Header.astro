@@ -1,0 +1,23 @@
+---
+import Menu from '@components/Menu.astro';
+import { Image } from 'astro:assets';
+import instagram from '@assets/img/instagram.svg';
+const { title } = Astro.props;
+---
+
+<header>
+  <div class="flex justify-between pt-4 md:pt-8 items-center">
+    <h1 class="text-5xl md:text-6xl font-extralight">
+      <a href="/">UKI TUBI</a>
+    </h1>
+    <div>
+      <a href="https://www.instagram.com/uki_tubi_" target="_blank">
+        <Image src={instagram} alt="Instagram" class="instagram-icon" />
+      </a>
+    </div>
+  </div>
+  <div>
+    <Menu />
+    <h1 class="uppercase text-5xl font-light pt-12 pb-16">{title}</h1>
+  </div>
+</header>
